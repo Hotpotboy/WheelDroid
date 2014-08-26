@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dip"
+    android:layout_height="300dip"
     android:orientation="vertical" >
     <RelativeLayout 
+        android:id="@+id/choose"
         android:layout_width="match_parent"
         android:layout_height="250dip"
-        android:layout_alignParentBottom="true"
         android:background="#B9D2F2">
+        <LinearLayout android:id="@+id/split"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:background="@android:color/transparent"
+            android:layout_centerHorizontal="true"  />
         <com.zhanghang.wheeldroid.WheelDroidView 
-            android:id="@+id/wheelView"
-            android:layout_width="match_parent"
-            android:layout_height="210dip"
+            android:id="@+id/wheelView1"
+            android:layout_width="wrap_content"
+            android:layout_height="250dip"
+            android:layout_toLeftOf="@id/split"
             />
-        <Button 
+        
+        <com.zhanghang.wheeldroid.WheelDroidView 
+            android:id="@+id/wheelView2"
+            android:layout_width="wrap_content"
+            android:layout_height="250dip"
+            android:layout_toRightOf="@id/split"
+            />
+        
+    </RelativeLayout>
+    <Button 
             android:id="@+id/sure"
             android:layout_width="match_parent"
-            android:layout_height="40dip"
-            android:layout_below="@id/wheelView"
+            android:layout_height="50dip"
+            android:layout_below="@id/choose"
             android:text="确定"/>
-    </RelativeLayout>
 </RelativeLayout>

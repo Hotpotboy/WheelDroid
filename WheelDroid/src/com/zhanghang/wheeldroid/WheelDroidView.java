@@ -1,4 +1,6 @@
 package com.zhanghang.wheeldroid;
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -23,6 +25,7 @@ public class WheelDroidView extends View {
 	private final int TEXT_SIZE = 36;
 	private int scrollerOffset = 0;
 	
+	private ArrayList<IOnWheelViewChangedListener> mListener;
 	
 	private Handler scrollerHander = new Handler(){//scroller滚动时消息处理器
 		@Override
@@ -61,7 +64,14 @@ public class WheelDroidView extends View {
     		else if(pos>=adapter.getCount()) pos=adapter.getCount()-1;
     		
     		if(pos!=curItemIndex){
+    			int cur = curItemIndex;
     			setCurItem(pos);
+    			if(mListener.size()>0){//响应值改变事件
+    				for(IOnWheelViewChangedListener l:mListener){
+    					boolean result = l.onChanged(cur, pos);
+    					if(result) break;
+    				}
+    			}
     		}
     		return true;
     	}
@@ -130,6 +140,13 @@ public class WheelDroidView extends View {
         gestureDetector = new GestureDetector(context,this.simple);//初始化手势处理
         gestureDetector.setIsLongpressEnabled(false);//设置长按手势
         scroller = new Scroller(context);//初始化滚动器
+        
+        //监听器列表
+        mListener = new ArrayList<IOnWheelViewChangedListener>();
+	}
+	
+	public void setOnWheelViewChangedListener(IOnWheelViewChangedListener l){
+		this.mListener.add(l);
 	}
 	
 	//清空布局
@@ -254,7 +271,7 @@ public class WheelDroidView extends View {
     }
     
     //设置当前选项
-    private void setCurItem(int cur){
+    public void setCurItem(int cur){
     	this.curItemIndex = cur;
     	this.invalidate();//更新布局
     }
