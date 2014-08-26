@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dip"
+    android:orientation="vertical" >
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="250dip"
+        android:layout_alignParentBottom="true"
+        android:background="#B9D2F2">
+        <com.zhanghang.wheeldroid.WheelDroidView 
+            android:id="@+id/wheelView"
+            android:layout_width="match_parent"
+            android:layout_height="210dip"
+            />
+        <Button 
+            android:id="@+id/sure"
+            android:layout_width="match_parent"
+            android:layout_height="40dip"
+            android:layout_below="@id/wheelView"
+            android:text="确定"/>
+    </RelativeLayout>
+</RelativeLayout>
